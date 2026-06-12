@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  # Agent 开发工程师学习与实习计划
  
  目标：2026 年暑假找到 agent 开发实习，大四秋招找到好工作。
@@ -62,3 +63,7 @@
  早上 30 分钟：投 5 家
  晚上 2-3 小时：写代码
  睡前 15 分钟：背 3 个面试题
+=======
+# agent-learning
+Agent development learning project
+>>>>>>> 48a4388d312b1b93e380daa7f551d86c173e6606

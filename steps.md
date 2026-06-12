@@ -578,7 +578,7 @@
  4. 发打招呼消息：直接用 BOSS 的模板，改成这样可以提高回复率：
     ```
     您好，我有 agent 开发项目经验，做过带工具调用和 RAG 的智能客服系统，
-    GitHub 项目在这里：https://github.com/你的用户名/agent-learning
+    GitHub 项目在这里：https://github.com/Pariond/agent-learning
     方便发简历给您看看吗？
     ```
  5. 每天投够 5 家再停
