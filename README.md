@@ -28,6 +28,11 @@
 pip install openai
 python first_agent.py
 
+## 运行效果
+
+![运行截图](screenshot.png)
+
+
 
 
 ## 项目 2：RAG 问答系统（进行中）
@@ -37,7 +42,5 @@ python first_agent.py
 ## 联系方式
 
 - GitHub：https://github.com/Pariond/agent-learning
-<<<<<<< HEAD
 
-=======
->>>>>>> 7463348075553123c47808a9abd03aeb03024c03
+
