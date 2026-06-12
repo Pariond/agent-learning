@@ -5,7 +5,7 @@
 import json
 from openai import OpenAI
 
-API_KEY = "sk-82ed228c9f1344ca97c06950c88b26c8"
+API_KEY = "sk-请替换成你的DeepSeek密钥" #运行前修改这一行
 BASE_URL = "https://api.deepseek.com"
 MODEL = "deepseek-chat"
 
