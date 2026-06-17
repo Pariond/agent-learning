@@ -30,6 +30,8 @@ def send_notification(msg):
     return "通知成功"
 
 
+def get_time(city):
+    return f"{city}当前的时间是14:30"
 TOOLS = [
     {
         "type": "function",
@@ -64,6 +66,23 @@ TOOLS = [
                 "required": ["message"]
             }
         }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_time",
+            "description": "查询某个城市当前的时间",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "城市名"
+                    }
+                },
+                "required": ["city"]
+            }
+        }
     }
 ]
 
@@ -77,7 +96,8 @@ def execute(tc):
         return json.dumps({"r": get_weather(**a)})
     if n == "send_notification":
         return json.dumps({"r": send_notification(**a)})
-
+    if n == "get_time":
+        return json.dumps({"r": get_time(**a)})
     return json.dumps({"e": "未知工具"})
 
 
