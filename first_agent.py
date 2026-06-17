@@ -17,12 +17,17 @@ client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
 
 def get_weather(city):
+    if not city or city.strip=="":
+        return f"输入不能为空"
     mock = {
         "北京": "25C晴",
         "上海": "28C多云",
         "广州": "32C阵雨"
     }
-    return mock.get(city, f"没有{city}的数据")
+    result=mock.get(city)
+    if result is None:
+        return f"抱歉，未获取到{city}的数据"
+    return result
 
 
 def send_notification(msg):
@@ -105,7 +110,7 @@ def run():
     msgs = [
         {
             "role": "system",
-            "content": "你是一个智能助手，可以查天气和发通知"
+            "content": "你是一个专业的电商客服。回答要礼貌、简洁、耐心。如果用户问的问题你查不到，就说'抱歉我查不到这个信息，请提供更详细的信息'。"
         }
     ]
     print("Agent启动！输入 q 退出")
