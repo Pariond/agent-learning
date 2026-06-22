@@ -1,46 +1,34 @@
-基于 DeepSeek API 的 Agent 工具调用实战项目。
+# E-commerce Customer Service Agent
+
+基于 DeepSeek + RAG 的电商智能客服系统。
 
 ## 项目结构
 
-├── first_agent.py     # 第一个 Agent：天气查询 + 通知发送
-├── rag_bot/           # RAG 文档问答系统（开发中）
-│   ├── ingest.py      # 文档导入与向量化
-│   └── query.py       # 检索问答入口
-└── ecommerce_agent/   # 电商智能客服 Agent（开发中）
+├── customer_service_agent.py   # 主程序：工具调用 + RAG 知识检索
+├── ingest.py                   # 知识库导入脚本（首次运行）
+├── knowledge_base.txt          # 知识库源文档
+├── first_agent.py              # 第一个 Agent 练习项目
+├── chroma_db/                  # 向量数据库（由 ingest.py 生成）
 
+## 功能
+
+- 商品搜索、订单查询、退换货政策、取消订单（4 个自定义工具）
+- RAG 知识库：发货、售后、发票等政策动态检索，政策变更只需改文档
+- 多轮对话记忆
+
+## 运行方式
+
+pip install openai langchain-community chromadb sentence-transformers
+python ingest.py                       # 首次运行，导入知识库
+python customer_service_agent.py       # 启动客服
 
 ## 技术栈
 
 - 大模型：DeepSeek（通过 OpenAI 兼容接口调用）
-- 框架：LangChain
+- Agent 框架：LangChain
 - 向量库：ChromaDB
-- 后端：FastAPI
-
-## 项目 1：Agent 工具调用
-
-实现了基于 function calling 的智能助手，支持多轮对话和工具调度。
-
-支持的工具：
-- 天气查询（模拟）
-- 通知发送（模拟）
-
-运行方式：
-pip install openai
-python first_agent.py
-
-## 运行效果
-
-![运行截图](screenshot.png)
-
-
-
-
-## 项目 2：RAG 问答系统（进行中）
-
-基于检索增强生成，支持对本地文档进行自然语言问答。
+- 语言：Python
 
 ## 联系方式
 
 - GitHub：https://github.com/Pariond/agent-learning
-
-
