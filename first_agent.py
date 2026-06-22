@@ -1,7 +1,3 @@
-"""
-第一个 Agent 脚本
-模型：DeepSeek（兼容 OpenAI SDK）
-"""
 import json
 from openai import OpenAI
 from dotenv import load_dotenv
