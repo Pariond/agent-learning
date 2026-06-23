@@ -22,6 +22,10 @@ pip install openai langchain-community chromadb sentence-transformers
 python ingest.py                       # 首次运行，导入知识库
 python customer_service_agent.py       # 启动客服
 
+## 演示截图
+
+![运行截图](rag_screenshot.png)
+
 ## 技术栈
 
 - 大模型：DeepSeek（通过 OpenAI 兼容接口调用）
