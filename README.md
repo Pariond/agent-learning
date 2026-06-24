@@ -42,3 +42,4 @@ streamlit run app.py              # 启动网页界面
 ## 演示截图
 
 ![运行截图](Demonstrate.png)
+```
