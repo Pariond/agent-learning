@@ -74,3 +74,84 @@ def clear_all():
     conn.commit()
     cursor.close()
     conn.close()
+import mysql.connector
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DB_CONFIG = {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": os.getenv("MYSQL_PASSWORD"),
+    "database": "ecommerce_agent"
+}
+
+def _get_conn():
+    """尝试连接 MySQL，失败时返回 None"""
+    try:
+        return mysql.connector.connect(**DB_CONFIG)
+    except Exception as e:
+        print(f"[db_manager] MySQL 不可用: {e}")
+        return None
+
+def save_message(session_id: str, role: str, content: str):
+    conn = _get_conn()
+    if not conn:
+        return
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO chat_history (session_id, role, content) VALUES (%s, %s, %s)",
+        (session_id, role, content)
+    )
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def get_history(session_id: str) -> list:
+    conn = _get_conn()
+    if not conn:
+        return []
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(
+        "SELECT role, content, timestamp FROM chat_history WHERE session_id = %s ORDER BY id",
+        (session_id,)
+    )
+    records = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return records
+
+def get_all_sessions() -> list:
+    conn = _get_conn()
+    if not conn:
+        return []
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT session_id, MIN(timestamp) as t FROM chat_history GROUP BY session_id ORDER BY t DESC"
+    )
+    sessions = [{"id": r[0], "time": str(r[1])} for r in cursor.fetchall()]
+    cursor.close()
+    conn.close()
+    return sessions
+
+def delete_session(session_id: str):
+    conn = _get_conn()
+    if not conn:
+        return
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM chat_history WHERE session_id = %s", (session_id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def clear_all():
+    conn = _get_conn()
+    if not conn:
+        return
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM chat_history")
+    conn.commit()
+    cursor.close()
+    conn.close()
