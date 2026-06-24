@@ -4,3 +4,4 @@ langchain-huggingface
 langchain-chroma
 sentence-transformers
 python-dotenv
+mysql-connector-python

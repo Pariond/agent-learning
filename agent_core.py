@@ -1,5 +1,5 @@
 """
-Agent 核心逻辑（从 customer_service_agent.py 拆出来的）
+Agent 核心逻辑
 供 Streamlit 前端调用，也保留原来的黑窗口入口
 """
 # -*- coding: utf-8 -*-
@@ -7,9 +7,7 @@ import json
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
-# ============================================================
 # 配置（部署时改成环境变量）
-# ============================================================
 # 加载 .env 文件里的环境变量
 load_dotenv()
 API_KEY = os.getenv("DEEPSEEK_API_KEY")                #自己导入环境变量 放入key
@@ -17,9 +15,7 @@ BASE_URL = "https://api.deepseek.com"
 MODEL = "deepseek-chat"
 client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
-# ============================================================
 # 加载向量知识库
-# ============================================================
 try:
     from langchain_huggingface import HuggingFaceEmbeddings
     from langchain_chroma import Chroma
@@ -38,9 +34,7 @@ except Exception as e:
     print(f"知识库加载失败（首次运行请先执行 ingest.py）: {e}")
     vectorstore = None
 
-# ============================================================
 # 商品和订单数据
-# ============================================================
 PRODUCTS = [
     {"id": 1001, "name": "iPhone 15",     "price": 5999,  "stock": 100},
     {"id": 1002, "name": "MacBook Pro",   "price": 14999, "stock": 50},
@@ -61,9 +55,7 @@ ALIASES = {
     "耳机": "AirPods Pro", "平板": "iPad Air", "手表": "Apple Watch",
 }
 
-# ============================================================
 # 工具函数
-# ============================================================
 def search_product(keyword):
     if keyword in ALIASES:
         keyword = ALIASES[keyword]
@@ -110,9 +102,7 @@ def execute_tool_call(tc):
     if name == "search_knowledge": return search_knowledge(**args)
     return "未知工具"
 
-# ============================================================
 # 核心函数：处理单条消息，返回回复文本
-# ============================================================
 def chat(user_input: str, messages: list) -> tuple:
     """
     处理用户输入，返回（回复文本, 更新后的消息列表）
@@ -135,9 +125,7 @@ def chat(user_input: str, messages: list) -> tuple:
 
     return reply, messages
 
-# ============================================================
 # CLI 入口（保留原先的黑窗口模式）
-# ============================================================
 if __name__ == "__main__":
     if "你的" in API_KEY:
         print("错误：还没填 API Key")
